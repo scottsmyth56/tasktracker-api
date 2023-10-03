@@ -36,9 +36,13 @@ SECRET_KEY = 'django-insecure-%r_=1=)pn1a&8f)@jl(&ce*o2tk5ngm=f6u%rbr=%l=bfuuchz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '8000-scottsmyth56-tasktracker-9xi5eeg4ac.us2.codeanyapp.com',]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-scottsmyth56-tasktracker-9xi5eeg4ac.us2.codeanyapp.com',
+    # Add other trusted origins if needed
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,9 +51,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage'
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'profiles'
 ]
 
 MIDDLEWARE = [
