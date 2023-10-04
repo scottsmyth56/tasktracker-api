@@ -10,7 +10,7 @@ class Task(models.Model):
     priority = models.CharField(max_length=20,choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')])
     category = models.CharField(max_length=20)
     status = models.CharField(max_length=20,choices=[('todo', 'To Do'), ('inprogress', 'In Progress'), ('done', 'Done')])
-    owner = models.ForeignKey(User, related_name="tasks",blank=True)
+    owner = models.ForeignKey(User, related_name="tasks",blank=True, on_delete=models.CASCADE)
     shared_users = models.ManyToManyField(User, related_name="shared_tasks",blank=True)
     attachments = models.ManyToManyField('Attachment', blank=True)
     
