@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     firstName = models.CharField(max_length=255, blank=True)
     lastName = models.CharField(max_length=255, blank=True)
@@ -19,7 +19,7 @@ class Profile(models.Model):
 
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(owner=instance)
+        Profile.objects.create(user=instance)
 
 
 post_save.connect(create_profile, sender=User)
