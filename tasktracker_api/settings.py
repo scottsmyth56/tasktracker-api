@@ -40,13 +40,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     "8000-scottsmyth56-tasktracker-9xi5eeg4ac.us2.codeanyapp.com",
-    "127.0.0.1"
-    'tasktrackerapi-320c209dd920.herokuapp.com',
+    "127.0.0.1",
+    "tasktrackerapi-320c209dd920.herokuapp.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://8000-scottsmyth56-tasktracker-9xi5eeg4ac.us2.codeanyapp.com"
-    'tasktrackerapi-320c209dd920.herokuapp.com',
+    "https://8000-scottsmyth56-tasktracker-9xi5eeg4ac.us2.codeanyapp.com",
+    "tasktrackerapi-320c209dd920.herokuapp.com",
    
 ]
 # Application definition
