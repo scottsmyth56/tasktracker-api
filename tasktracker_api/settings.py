@@ -36,6 +36,8 @@ SECRET_KEY = "django-insecure-%r_=1=)pn1a&8f)@jl(&ce*o2tk5ngm=f6u%rbr=%l=bfuuchz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
 ALLOWED_HOSTS = [
     "8000-scottsmyth56-tasktracker-9xi5eeg4ac.us2.codeanyapp.com",
     "127.0.0.1",
@@ -105,7 +107,7 @@ WSGI_APPLICATION = "tasktracker_api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DEV = False
+DEV = True
 
 if DEV:
     DATABASES = {
