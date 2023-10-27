@@ -16,7 +16,7 @@ class TaskSerializer(serializers.ModelSerializer):
             'priority',
             'category',
             'status',
-            'attachments',
+            'image',
             'owner_username',  
             'shared_users_usernames',
         ]
@@ -26,3 +26,12 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def get_shared_users_usernames(self, obj):
         return [user.username for user in obj.shared_users.all()]
+    
+    # def create(self, validated_data):
+    #     attachments_data = validated_data.pop('attachments', [])
+    #     task = Task.objects.create(**validated_data)
+
+    #     for attachment in attachments_data:
+    #         Attachment.objects.create(task=task, file=attachment)
+
+    #     return task

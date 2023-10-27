@@ -12,18 +12,19 @@ class Task(models.Model):
     status = models.CharField(max_length=20,choices=[('todo', 'To Do'), ('inprogress', 'In Progress'), ('done', 'Done')])
     owner = models.ForeignKey(User, related_name="tasks",blank=True, on_delete=models.CASCADE)
     shared_users = models.ManyToManyField(User, related_name="shared_tasks",blank=True)
-    attachments = models.ManyToManyField('Attachment', blank=True)
+    image = models.ImageField(
+        upload_to='images/', default='../', blank=True
+    )
+    #attachments = models.ManyToManyField('Attachment', blank=True)
     
     def __str__(self):
         return self.title
     
     
-class Attachment(models.Model):
-    file = models.FileField(upload_to='attachments/')
-    created_at = models.DateTimeField(auto_now_add=True)
+# class Attachment(models.Model):
+#     file = models.FileField(upload_to='attachments/')
+#     created_at = models.DateTimeField(auto_now_add=True)
     
-    def __str__(self):
-        return self.file.name
-    
-    
+#     def __str__(self):
+#         return self.file.name
     
