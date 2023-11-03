@@ -33,26 +33,30 @@ class EventInvitationCreateAPIView(generics.ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         event_id = request.data.get("event")
         recipient_user_id = request.data.get("recipient")
-        #print(recipient_username)
+        # print(recipient_username)
         recipient = User.objects.get(id=recipient_user_id)
 
-     
-        if EventInvitation.objects.filter(event_id=event_id, recipient=recipient).exists():
-            return Response({"message": "User already invited to this event."},
-                            status=status.HTTP_400_BAD_REQUEST)
+        if EventInvitation.objects.filter(
+            event_id=event_id, recipient=recipient
+        ).exists():
+            return Response(
+                {"message": "User already invited to this event."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
 
     def perform_create(self, serializer):
         invitation = serializer.save(sender=self.request.user)
         event = invitation.event
         event.invited_users.add(invitation.recipient)
-       # print(invitation.recipient.username)
-       # print(event.invited_users.all())
-       # print(self.request.user.username) 
+        # print(invitation.recipient.username)
+        # print(event.invited_users.all())
+        # print(self.request.user.username)
         event.save()
