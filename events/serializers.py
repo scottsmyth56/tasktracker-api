@@ -30,6 +30,7 @@ class EventSerializer(serializers.ModelSerializer):
 class EventInvitationSerializer(serializers.ModelSerializer):
     sender_username = serializers.SerializerMethodField()
     recipient_username = serializers.SerializerMethodField()
+    event_title = serializers.SerializerMethodField()
 
     class Meta:
         model = EventInvitation
@@ -41,6 +42,7 @@ class EventInvitationSerializer(serializers.ModelSerializer):
             "accepted",
             "sender_username",
             "recipient_username",
+            "event_title",
         ]
 
     def get_sender_username(self, obj):
@@ -48,3 +50,6 @@ class EventInvitationSerializer(serializers.ModelSerializer):
 
     def get_recipient_username(self, obj):
         return obj.recipient.username
+
+    def get_event_title(self, obj):
+        return obj.event.title
