@@ -6,6 +6,7 @@ from .models import EventInvitation
 class EventSerializer(serializers.ModelSerializer):
     invited_users = serializers.SerializerMethodField()
     accepted_users = serializers.SerializerMethodField()
+    owner_username = serializers.SerializerMethodField()
 
     class Meta:
         model = Event
@@ -18,7 +19,11 @@ class EventSerializer(serializers.ModelSerializer):
             "location",
             "invited_users",
             "accepted_users",
+            "owner_username",
         ]
+
+    def get_owner_username(self, obj):
+        return obj.owner.username
 
     def get_invited_users(self, obj):
         return [user.username for user in obj.invited_users.all()]

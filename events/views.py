@@ -8,6 +8,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import EventInvitationSerializer
 from .models import EventInvitation
 from django.contrib.auth.models import User
+from rest_framework.decorators import api_view
 
 
 class EventListAPIView(generics.ListCreateAPIView):
@@ -60,3 +61,31 @@ class EventInvitationCreateAPIView(generics.ListCreateAPIView):
         # print(event.invited_users.all())
         # print(self.request.user.username)
         event.save()
+
+
+@api_view(["POST"])
+def accept_invitation(request, pk):
+    try:
+        if not request.user.is_authenticated:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        invitation = EventInvitation.objects.get(pk=pk, recipient=request.user)
+
+        if invitation.accepted:
+            return Response(
+                {"message": "This invitation has already been accepted."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        invitation.accepted = True
+        invitation.save()
+        event = invitation.event
+        event.accepted_users.add(request.user)
+        event.save()
+
+        return Response(
+            {"message": "Invitation accepted successfully!"}, status=status.HTTP_200_OK
+        )
+
+    except Exception as e:
+        return Response({"message": str(e)}, status=status.HTTP_400_BAD_REQUEST)
