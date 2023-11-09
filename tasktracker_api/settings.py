@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = "django-insecure-%r_=1=)pn1a&8f)@jl(&ce*o2tk5ngm=f6u%rbr=%l=bfuuchz"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
@@ -53,6 +53,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://tasktracker-app-273d99460b58.herokuapp.com"
 ]
 # Application definition
 
@@ -82,9 +83,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
     ],
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+    
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -126,7 +125,7 @@ WSGI_APPLICATION = "tasktracker_api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DEV = True
+DEV = False
 
 if DEV:
     DATABASES = {
@@ -139,7 +138,7 @@ else:
     DATABASES = {
         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
-
+    print("connected")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
