@@ -7,6 +7,7 @@ from .models import Task
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.db.models import Q
 
+
 class TaskListAPIView(generics.ListCreateAPIView):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -16,7 +17,6 @@ class TaskListAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         user = self.request.user
         return Task.objects.filter(Q(owner=user) | Q(shared_users=user))
-
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

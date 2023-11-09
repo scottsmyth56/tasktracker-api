@@ -7,5 +7,6 @@ urlpatterns = [
     path('events/<int:pk>/', views.EventRetrieveUpdateDestroyAPIView.as_view(), name='event-detail'),
     path('events/invite/', views.EventInvitationCreateAPIView.as_view(), name='event-invite'),
     path('event-invitations/<int:pk>/accept/', accept_invitation, name='accept-invitation'),
+    path('event-invitations/<int:pk>/', views.EventInvitationUpdateDestroyApiView.as_view(), name='event-invitation-detail'),
 
 ]

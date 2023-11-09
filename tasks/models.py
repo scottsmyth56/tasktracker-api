@@ -18,8 +18,8 @@ class Task(models.Model):
     owner = models.ForeignKey(
         User, related_name="tasks", blank=True, on_delete=models.CASCADE
     )
-    shared_users = models.ManyToManyField(User, related_name="shared_tasks", blank=True)
-    image = models.ImageField(upload_to="images/", default="../", blank=True)
+    shared_users = models.ManyToManyField(User, related_name="shared_tasks", blank=True) 
+    image = models.ImageField(upload_to="images/", default="images/default_task_xkhpfw.png", blank=True)
 
     def __str__(self):
         return self.title

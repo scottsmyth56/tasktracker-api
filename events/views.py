@@ -13,7 +13,7 @@ from rest_framework.decorators import api_view
 
 class EventListAPIView(generics.ListCreateAPIView):
     serializer_class = EventSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Event.objects.all()
 
     def perform_create(self, serializer):
@@ -23,18 +23,17 @@ class EventListAPIView(generics.ListCreateAPIView):
 class EventRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class EventInvitationCreateAPIView(generics.ListCreateAPIView):
     queryset = EventInvitation.objects.all()
     serializer_class = EventInvitationSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         event_id = request.data.get("event")
         recipient_user_id = request.data.get("recipient")
-        # print(recipient_username)
         recipient = User.objects.get(id=recipient_user_id)
 
         if EventInvitation.objects.filter(
@@ -57,10 +56,12 @@ class EventInvitationCreateAPIView(generics.ListCreateAPIView):
         invitation = serializer.save(sender=self.request.user)
         event = invitation.event
         event.invited_users.add(invitation.recipient)
-        # print(invitation.recipient.username)
-        # print(event.invited_users.all())
-        # print(self.request.user.username)
         event.save()
+
+class EventInvitationUpdateDestroyApiView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = EventInvitation.objects.all()
+    serializer_class = EventInvitationSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 @api_view(["POST"])
