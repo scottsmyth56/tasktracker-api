@@ -44,7 +44,6 @@ Manual Tests were carried out on both the Client side App to test API connectivi
 | **Event Detail View (UI)**        | Navigate to `/events/<int:pk>/` with a valid event ID.                        | The page should display detailed information about the specified event.                   | Works         |
 | **Event Invitation (UI)**         | Navigate to `/events/invite/` and fill out the invitation form.               | A new event invitation should be created and sent.                                        | Works         |
 | **Accept Event Invitation (UI)**  | Navigate to `/event-invitations/<int:pk>/accept/` with a valid invitation ID. | The invitation should be accepted, and the user's status for the event should be updated. | Works         |
-| **Event Invitation Details (UI)** | Navigate to `/event-invitations/<int:pk>/` with a valid invitation ID.        | The page should display detailed information about the specified event invitation.        | Works         |
 | **Task List View (UI)**           | Navigate to `/tasks/`.                                                        | The page should display a list of all tasks.                                              | Works         |
 | **Task Detail View (UI)**         | Navigate to `/tasks/<int:pk>/` with a valid task ID.                          | The page should display detailed information about the specified task.                    | Works         |
 | **Admin Panel Access (UI)**       | Navigate to `/admin/`.                                                        | The admin panel should be accessible for authorized users.                                | Works         |
@@ -91,6 +90,10 @@ Manual Tests were carried out on both the Client side App to test API connectivi
 - [Black Formatter]
 - [Cloudinary](https://cloudinary.com/)
 - [dj-database-url](https://pypi.org/project/dj-database-url/)
+
+### Encountered Problems
+
+- During the deployment process of the API, I encountered a static files issues, where my static files were not being served. I was unable to fix this issuee as when i tried to run `python manage.py collectstatic` it would not collect the static files. I tried to fix this issue by adding the following to my settings.py file but due to time constraints i was unable to fix the issue. I previosly had this issue in a previous project and was able to fix it by clearing my cloudinary directory and reuploading the static files. I tried this but it did not work. due to this being a backend api and not user facing i decided to move on and focus on the client side app.
 
 ## Deployment
 
