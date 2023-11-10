@@ -53,7 +53,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://tasktracker-app-273d99460b58.herokuapp.com"
+    "https://tasktracker-app-273d99460b58.herokuapp.com",
 ]
 # Application definition
 
@@ -83,7 +83,6 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
     ],
-    
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -98,7 +97,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
-    
 ]
 
 ROOT_URLCONF = "tasktracker_api.urls"
